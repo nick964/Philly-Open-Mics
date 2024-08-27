@@ -15,6 +15,7 @@ export const events = [
       active: false,
       notes: "Check Punch Line's website or instagram for more details",
       dayOfWeek: 'Tuesday',
+      eventType: 'COMEDY',
       rrule: 'N/A'
     },
     {
@@ -32,6 +33,7 @@ export const events = [
       active: false,
       notes: '',
       dayOfWeek: 'Monday',
+      eventType: 'COMEDY',
       rrule: 'FREQ=MONTHLY;BYDAY=3MO'
     },
     {
@@ -49,6 +51,7 @@ export const events = [
       active: false,
       notes: '',
       dayOfWeek: 'Monday',
+      eventType: 'COMEDY',
       rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO'
     },
     {
@@ -66,6 +69,7 @@ export const events = [
       active: false,
       notes: '',
       dayOfWeek: 'Thursday',
+      eventType: 'COMEDY',
       rrule: 'FREQ=WEEKLY;BYDAY=TH'
     }
   ];

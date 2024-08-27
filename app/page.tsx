@@ -1,7 +1,7 @@
 // app/page.tsx
 "use client";
 
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { events } from './data/events';
 import { isEventToday } from './utils/recurrence';
@@ -22,10 +22,12 @@ interface Event {
   notes: string;
   dayOfWeek: string;
   rrule: string;
+  eventType: string;
 }
 
 export default function Home() {
   const [todaysEvents, setTodaysEvents] = useState<Event[]>([]);
+  const [filter, setFilter] = useState<string>('ANY');
 
   useEffect(() => {
     const today = new Date();
@@ -33,10 +35,11 @@ export default function Home() {
     const filteredEvents = events.filter(event => 
       event.dayOfWeek === todayDayOfWeek &&
       //(event.rrule === 'N/A' || isEventToday(event.rrule, today))
-      (event.rrule === 'N/A' || event.dayOfWeek === todayDayOfWeek)
+      (event.rrule === 'N/A' || event.dayOfWeek === todayDayOfWeek) &&
+      (filter === 'ANY' || event.eventType === filter)
     );
     setTodaysEvents(filteredEvents);
-  }, []);
+  }, [filter]);
 
   return (
     <Container>
@@ -44,6 +47,16 @@ export default function Home() {
         <Col>
           <h1>Open Mic Finder</h1>
           <p>Discover open mic events happening near you today.</p>
+          <Form>
+            <Form.Group controlId="eventTypeSelect">
+              <Form.Label>Filter by Event Type</Form.Label>
+              <Form.Control as="select" value={filter} onChange={(e) => setFilter(e.target.value)} style={{ width: 'auto' }}>
+                <option value="ANY">Any</option>
+                <option value="COMEDY">Comedy</option>
+                <option value="MUSIC">Music</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
         </Col>
       </Row>
       <Row>
