@@ -1,0 +1,72 @@
+// data/events.ts
+export const events = [
+    {
+      id: 1,
+      bar: 'Punch Line Mic',
+      link: 'https://punchlinephilly.com/',
+      neighborhood: 'Northern Liberties',
+      signupTime: '6:00 PM',
+      showTime: '7:00 PM',
+      signUp: 'Online + in person',
+      length: '3 min',
+      order: 'Lottery',
+      recurrence: 'Variable',
+      host: 'Variable',
+      active: false,
+      notes: "Check Punch Line's website or instagram for more details",
+      dayOfWeek: 'Tuesday',
+      rrule: 'N/A'
+    },
+    {
+      id: 2,
+      bar: "Sweeney's Comedy Open Mic",
+      link: 'https://sweeneysphilly.com/',
+      neighborhood: 'Northeast Philly',
+      signupTime: '7:30 PM',
+      showTime: '8:00 PM',
+      signUp: 'In person',
+      length: '5-10 min',
+      order: 'In order',
+      recurrence: 'Every 3rd Monday',
+      host: 'Josh Jak',
+      active: false,
+      notes: '',
+      dayOfWeek: 'Monday',
+      rrule: 'FREQ=MONTHLY;BYDAY=3MO'
+    },
+    {
+      id: 3,
+      bar: 'Nut Hut Showcase and Open Mic',
+      link: 'https://nuthutsaloon.com/',
+      neighborhood: 'Fishtown',
+      signupTime: '8:00 PM',
+      showTime: '8:30 PM',
+      signUp: 'In person',
+      length: '5 min',
+      order: 'In order',
+      recurrence: 'Every other Monday',
+      host: 'Alban Xhema',
+      active: false,
+      notes: '',
+      dayOfWeek: 'Monday',
+      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO'
+    },
+    {
+      id: 4,
+      bar: "JJ Mallon's",
+      link: 'https://jjmallons.com/',
+      neighborhood: 'Northern Liberties',
+      signupTime: '8:30 PM',
+      showTime: '9:00 PM',
+      signUp: 'In person',
+      length: '',
+      order: '',
+      recurrence: 'Weekly',
+      host: 'Ty Wood & Sam Wolf',
+      active: false,
+      notes: '',
+      dayOfWeek: 'Thursday',
+      rrule: 'FREQ=WEEKLY;BYDAY=TH'
+    }
+  ];
+  

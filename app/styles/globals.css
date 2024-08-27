@@ -1,0 +1,61 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Apply a global font */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light background color */
+    color: #212529; /* Dark text color */
+  }
+  
+  /* Headings styles */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  /* Paragraph styles */
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  /* List styles */
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Links */
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Container styles */
+  .container {
+    padding: 1rem;
+  }
+  
+  /* Custom card styles */
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  /* Bootstrap utility overrides or custom styles */
+  .my-5 {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+  
