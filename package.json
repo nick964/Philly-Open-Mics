@@ -15,6 +15,7 @@
     "react": "^18",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18",
+    "react-rrule-generator": "^1.2.0",
     "rrule": "^2.8.1"
   },
   "devDependencies": {
