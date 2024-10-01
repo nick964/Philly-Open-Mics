@@ -1,11 +1,13 @@
 // app/pages/mics/[id]/page.tsx
 "use client";
-
+import { useAuthState } from 'react-firebase-hooks/auth'; // Using Firebase Hooks for Authentication
+import { auth } from '../../../lib/firebase'; // Assuming Firebase Auth is initialized in firebase.ts
 import { useRouter, useParams } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { db } from '../../../lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button} from 'react-bootstrap';
 import { Event } from '../../models/event';
 
 
@@ -14,6 +16,7 @@ export default function EventDetail() {
   const { id } = useParams();
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
+  const [user] = useAuthState(auth); // Get the logged-in user
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -67,6 +70,18 @@ export default function EventDetail() {
 
   return (
     <Container>
+      <Row className="my-5">
+      <Col>
+        {/* Show the edit button only if the user is logged in */}
+        {user && (
+          <div className="mt-4">
+            <Link href={`/mics/${event.id}/edit`} passHref>
+              <Button variant="warning">Edit Event</Button>
+            </Link>
+          </div>
+        )}
+        </Col>
+      </Row>
       <Row className="my-5">
         <Col>
           <h1>{event.name}</h1>

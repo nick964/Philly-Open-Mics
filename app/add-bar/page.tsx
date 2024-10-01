@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import RRuleGenerator from 'react-rrule-generator';
+import '../styles/rrule-generator-override.css'// Adjust the path based on your folder structure
 
 export default function AddBar() {
   const [name, setName] = useState('');

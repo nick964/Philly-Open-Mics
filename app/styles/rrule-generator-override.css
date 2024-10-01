@@ -1,0 +1,41 @@
+/* Custom CSS for react-rrule-generator */
+
+.rrule-generator__controls {
+    margin: 10px 0;
+  }
+  
+  .rrule-generator__day {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  
+  .rrule-generator__day button {
+    background-color: #0d6efd; /* Bootstrap primary color */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .rrule-generator__day button:hover {
+    background-color: #0b5ed7; /* Bootstrap hover effect */
+  }
+  
+  .rrule-generator__day button.active {
+    background-color: #0a58ca; /* Bootstrap active state */
+    box-shadow: none;
+  }
+  
+  .rrule-generator__label,
+  .rrule-generator__input,
+  .rrule-generator__select {
+    font-family: inherit;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    width: auto;
+  }
+  
