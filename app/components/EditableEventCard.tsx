@@ -77,6 +77,15 @@ export default function EditableEventCard({ event }: EditableEventCardProps) {
                   onChange={handleInputChange}
                 />
               </Form.Group>
+              <Form.Group controlId="formIsActive">
+                <Form.Label>Is active?</Form.Label>
+                <Form.Control
+                  type="switch"
+                  name="isActive"
+                  checked={editableEvent.isActive}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
               {/* Add other fields similarly */}
             </Form>
             <Button variant="success" onClick={handleSaveChanges} className="mt-3">

@@ -134,6 +134,15 @@ export default function EditEventPage() {
           />
         </Form.Group>
 
+        <Form.Group controlId="formIsActive" className="mt-3">
+          <Form.Label>Is active?</Form.Label>
+          <Form.Check
+            type="switch"
+            checked={event.isActive}
+            onChange={(e) => setEvent({ ...event, isActive: e.target.checked })}
+          />
+        </Form.Group>
+
         <Form.Group controlId="formNotes" className="mt-3">
           <Form.Label>Notes</Form.Label>
           <Form.Control

@@ -47,6 +47,7 @@ export default function Home() {
     const filtered = events.filter(event => 
       event.dayOfWeek === dayOfWeek &&
       (filter === 'ANY' || event.mictype.toUpperCase() === filter)
+      && event.isActive
     );
     setFilteredEvents(filtered);
   };
