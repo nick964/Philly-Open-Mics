@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { db } from '../lib/firebase';
 import { collection, getDocs, QuerySnapshot, DocumentData } from 'firebase/firestore';
@@ -14,6 +14,7 @@ export default function Home() {
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [filter, setFilter] = useState<string>('ANY');
   const [dayOfWeek, setDayOfWeek] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
@@ -21,6 +22,7 @@ export default function Home() {
 
     const fetchEvents = async () => {
       try {
+        setLoading(true);
         const eventsCollection = collection(db, 'mics');
         const eventsSnapshot: QuerySnapshot<DocumentData> = await getDocs(eventsCollection);
         
@@ -33,6 +35,8 @@ export default function Home() {
         filterEvents(eventsData, filter, today);
       } catch (error) {
         console.error("Error fetching events: ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -98,16 +102,23 @@ export default function Home() {
       {/* Event Cards Section */}
       <Container>
         <Row>
-          {filteredEvents.length > 0 ? (
-            filteredEvents.map(event => (
-              <Col key={event.id} md={4} className="mb-4">
-                <EventCard event={event} /> {/* Use the EventCard component */}
-              </Col>
-            ))
-          ) : (
+          {loading ? (
             <Col className="text-center">
-              <p>No events found for the selected day.</p>
+              <Spinner animation="border" variant="primary" />
+              <p>Loading events...</p>
             </Col>
+            ) : (
+            filteredEvents.length > 0 ? (
+              filteredEvents.map(event => (
+                <Col key={event.id} md={4} className="mb-4">
+                  <EventCard event={event} /> {/* Use the EventCard component */}
+                </Col>
+              ))
+            ) : (
+              <Col className="text-center">
+                <p>No events found for the selected day.</p>
+              </Col>
+            )
           )}
         </Row>
       </Container>

@@ -6,8 +6,8 @@ import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { db } from '../../../lib/firebase';
-import { doc, getDoc } from 'firebase/firestore';
-import { Container, Row, Col, Card, Button} from 'react-bootstrap';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore';
+import { Container, Row, Col, Card, Button, Modal} from 'react-bootstrap';
 import { Event } from '../../models/event';
 
 
@@ -16,7 +16,28 @@ export default function EventDetail() {
   const { id } = useParams();
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [user] = useAuthState(auth); // Get the logged-in user
+
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  }
+
+  const handleDeleteClose = () => {
+    setShowDeleteModal(false);
+  }
+
+  const handleConfirmDelete = async () => {
+    try {
+      if (event) {
+        await deleteDoc(doc(db, 'mics', event.id));
+        console.log('Event deleted successfully');
+        handleDeleteClose();
+      }
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  }
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -74,10 +95,15 @@ export default function EventDetail() {
       <Col>
         {/* Show the edit button only if the user is logged in */}
         {user && (
-          <div className="mt-4">
-            <Link href={`/mics/${event.id}/edit`} passHref>
-              <Button variant="warning">Edit Event</Button>
-            </Link>
+          <div>
+            <div className="mt-4">
+              <Link href={`/mics/${event.id}/edit`} passHref>
+                <Button variant="warning">Edit Event</Button>
+              </Link>
+            </div>
+            <div className="mt-4">
+              <Button variant="danger" onClick={handleDeleteClick}>Delete</Button>
+            </div>
           </div>
         )}
         </Col>
@@ -119,6 +145,24 @@ export default function EventDetail() {
           </Card>
         </Col>
       </Row>
+
+            {/* Modal for delete confirmation */}
+      <Modal show={showDeleteModal} onHide={handleDeleteClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete the event "{event.name}"?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleDeleteClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }
