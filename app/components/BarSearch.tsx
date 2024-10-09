@@ -16,17 +16,16 @@ export default function BarSearch() {
   const handleSearch = async () => {
     if (!query) return;
 
-    const url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json`;
+    const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json`;
     const params = {
       input: query,
       inputtype: 'textquery',
       fields: 'formatted_address,geometry',
-      key: 'AIzaSyC1kfrj0JVo-ze_E_4wEbw3UzWtOQzJYBk',
+      key: GOOGLE_PLACES_API_KEY,
     };
 
     try {
       const response = await axios.get(url, { params });
-      console.log('Response:', response.data);
       const result = response.data.candidates[0]; // Get the first result
 
       if (result) {
