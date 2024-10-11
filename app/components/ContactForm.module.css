@@ -1,0 +1,8 @@
+/* components/ContactForm.module.css */
+.contactForm {
+    background-color: #f8f9fa; /* Light gray background to make it stand out */
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  

@@ -9,7 +9,8 @@ import { db } from '../../../lib/firebase';
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { Container, Row, Col, Card, Button, Modal} from 'react-bootstrap';
 import { Event } from '../../models/event';
-
+import ContactForm from '../../components/ContactForm';
+import axios from 'axios';
 
 export default function EventDetail() {
   const router = useRouter();
@@ -17,7 +18,9 @@ export default function EventDetail() {
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [suggestFormSubmitted, setSuggestFormSubmitted] = useState(false);
   const [user] = useAuthState(auth); // Get the logged-in user
+
 
   const handleDeleteClick = () => {
     setShowDeleteModal(true);
@@ -38,6 +41,19 @@ export default function EventDetail() {
       console.error('Error deleting event:', error);
     }
   }
+
+  const handleContactFormSubmit = async (name: string, email: string, message: string) => {
+    try {
+      await axios.post('/api/send-email', {
+        name,
+        email,
+        message,
+      });
+      setSuggestFormSubmitted(true);
+    } catch (err) {
+      setError('An error occurred while sending the message.');
+    }
+  };
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -143,6 +159,11 @@ export default function EventDetail() {
               </Card.Text>
             </Card.Body>
           </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <ContactForm onSubmit={handleContactFormSubmit} />
         </Col>
       </Row>
 
